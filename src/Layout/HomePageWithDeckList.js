@@ -41,7 +41,7 @@ export function HomeWithDeckList() {
     return (
         <div>
             <Header />
-            <button onClick={() => {navigate('decks/new')}}>Create Deck</button>
+            <button onClick={() => {navigate('/decks/new')}}>Create Deck</button>
             <DeckList deckList={deckList} handleDelete={handleDelete} />
         </div>
     );

@@ -12,6 +12,7 @@ function Layout() {
         <div className="App">
             <Routes>
                 <Route path="/" element={<HomeWithDeckList />} />
+                <Route path="/decks" element={<HomeWithDeckList />} />
                 <Route path="/decks/new/*" element={<AddDeck />} />
                 <Route path="/decks/:deckId/*" element={<DeckViewWithCards />} />
                 <Route path="/decks/:deckId/study/*" element={<DeckStudyWithFlips />} />

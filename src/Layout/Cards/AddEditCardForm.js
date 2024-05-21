@@ -11,7 +11,9 @@ export const AddCard = () => {
     useEffect(() => {fetchDeck(deckId, setDeck)}, []);
 
     const handleSave = async (card) => {
-        await createCard(deckId, card);
+        const controller = new AbortController();
+        const signal = controller.signal;
+        await createCard(deckId, card, signal);
     };
 
     return (
@@ -39,7 +41,8 @@ export const EditCard = () => {
     const { deckId, cardId } = useParams();
 
     const handleSave = async (card) => {
-        const updatedCard = { id: cardId, ...card, deckId };
+        card.deckId = Number(deckId);
+        const updatedCard = { id: cardId, ...card};
         const controller = new AbortController();
         const signal = controller.signal;
         await updateCard(updatedCard, signal);
@@ -89,7 +92,7 @@ const FormComponent = ({ deckId, cardId, onSave, initialFront = "", initialBack 
     const handleSubmit = async (event) => {
         event.preventDefault();
         await onSave({ front, back });
-        navigate(`/decks/${deckId}`);
+        if (cardId) navigate(`/decks/${deckId}`); else {setFront(""); setBack("");};
     };
 
     return (
